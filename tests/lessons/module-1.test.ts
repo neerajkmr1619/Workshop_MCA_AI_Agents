@@ -33,3 +33,16 @@ describe.each(LESSONS)("lesson %s", (id) => {
     );
   });
 });
+
+it.each(LESSONS)("imports with no credentials at all: %s", async (id) => {
+  vi.resetModules();
+  const saved = { ...process.env };
+  for (const k of ["OPENAI_API_KEY", "TAVILY_API_KEY", "ANTHROPIC_API_KEY", "GOOGLE_API_KEY"]) {
+    delete process.env[k];
+  }
+  try {
+    await expect(import(`../../lessons/module-1/${id}.ts`)).resolves.toBeDefined();
+  } finally {
+    Object.assign(process.env, saved);
+  }
+});
