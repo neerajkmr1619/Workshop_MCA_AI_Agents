@@ -8,13 +8,13 @@ export interface EnvFinding {
 const MINIMUM_NODE_MAJOR = 20;
 
 const REQUIRED_KEYS = [
-  { name: "OPENAI_API_KEY", why: "every lesson uses an OpenAI model" },
+  { name: "OPENAI_API_KEY", why: "every lesson in the course" },
   { name: "TAVILY_API_KEY", why: "lessons 1.2 web search and 1.5 personal chef" },
 ];
 
 const OPTIONAL_KEYS = [
-  { name: "ANTHROPIC_API_KEY", why: "lesson 1.1, model providers" },
-  { name: "GOOGLE_API_KEY", why: "lesson 1.1, model providers" },
+  { name: "ANTHROPIC_API_KEY", why: "lesson 1.1 (model providers)" },
+  { name: "GOOGLE_API_KEY", why: "lesson 1.1 (model providers)" },
 ];
 
 export function buildEnvReport(input: {
