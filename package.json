@@ -1,0 +1,33 @@
+{
+  "name": "workshop-lc101",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "lesson": "tsx src/runner/cli.ts",
+    "lessons": "tsx src/runner/cli.ts --list",
+    "check-env": "tsx src/check-env.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@langchain/anthropic": "^1.5.10",
+    "@langchain/core": "^1.2.11",
+    "@langchain/google-genai": "^2.3.2",
+    "@langchain/langgraph": "^1.4.15",
+    "@langchain/ollama": "^1.3.0",
+    "@langchain/openai": "^1.5.13",
+    "@langchain/tavily": "^1.2.0",
+    "dotenv": "^17.0.0",
+    "langchain": "^1.5.11",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0"
+  }
+}
