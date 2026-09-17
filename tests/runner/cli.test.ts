@@ -23,10 +23,22 @@ describe("parseArgs", () => {
   });
 
   it("rejects a non-numeric --step", () => {
-    expect(() => parseArgs(["1.1", "--step", "abc"])).toThrow(/--step expects a number/i);
+    expect(() => parseArgs(["1.1", "--step", "abc"])).toThrow(/--step expects an integer/i);
   });
 
   it("rejects --step with no value", () => {
-    expect(() => parseArgs(["1.1", "--step"])).toThrow(/--step expects a number/i);
+    expect(() => parseArgs(["1.1", "--step"])).toThrow(/--step expects an integer/i);
+  });
+
+  it("rejects a non-integer --step", () => {
+    expect(() => parseArgs(["1.1", "--step", "2.5"])).toThrow(/--step expects an integer/i);
+  });
+
+  it("rejects --step= with an empty value", () => {
+    expect(() => parseArgs(["1.1", "--step="])).toThrow(/--step expects an integer/i);
+  });
+
+  it("rejects a non-integer --step=2.5", () => {
+    expect(() => parseArgs(["1.1", "--step=2.5"])).toThrow(/--step expects an integer/i);
   });
 });

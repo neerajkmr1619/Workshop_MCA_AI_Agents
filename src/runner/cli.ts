@@ -26,7 +26,7 @@ export function parseArgs(argv: string[]): CliOptions {
       const value = argv[i + 1];
       const parsed = Number(value);
       if (value === undefined || !Number.isInteger(parsed)) {
-        throw new Error(`--step expects a number, got ${value ?? "nothing"}`);
+        throw new Error(`--step expects an integer, got ${value ?? "nothing"}`);
       }
       options.only = parsed;
       i += 1;
@@ -36,8 +36,8 @@ export function parseArgs(argv: string[]): CliOptions {
     if (arg.startsWith("--step=")) {
       const value = arg.slice("--step=".length);
       const parsed = Number(value);
-      if (!Number.isInteger(parsed)) {
-        throw new Error(`--step expects a number, got ${value}`);
+      if (value === "" || !Number.isInteger(parsed)) {
+        throw new Error(`--step expects an integer, got ${value === "" ? "nothing" : value}`);
       }
       options.only = parsed;
       continue;
