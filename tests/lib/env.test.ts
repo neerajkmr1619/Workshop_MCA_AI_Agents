@@ -26,6 +26,22 @@ describe("isPlaceholder", () => {
     expect(isPlaceholder("YOUR_TAVILY_API_KEY_HERE")).toBe(true);
   });
 
+  it("treats changeme, placeholder, todo, and xxx-style values as placeholders", () => {
+    expect(isPlaceholder("changeme")).toBe(true);
+    expect(isPlaceholder("CHANGEME")).toBe(true);
+    expect(isPlaceholder("placeholder")).toBe(true);
+    expect(isPlaceholder("PLACEHOLDER")).toBe(true);
+    expect(isPlaceholder("todo")).toBe(true);
+    expect(isPlaceholder("TODO")).toBe(true);
+    expect(isPlaceholder("xxx")).toBe(true);
+    expect(isPlaceholder("xxxx")).toBe(true);
+    expect(isPlaceholder("XXXX")).toBe(true);
+  });
+
+  it("does not treat realistic keys containing placeholder words as placeholders", () => {
+    expect(isPlaceholder("sk-proj-todo-list-app-abc123")).toBe(false);
+  });
+
   it("accepts a value that looks like a real key", () => {
     expect(isPlaceholder("sk-proj-abc123")).toBe(false);
   });
