@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { futureDate, parseKiwiResult, toFlights } from "../../lessons/module-2/2.1-trip-graph";
+import { cheapestFare, futureDate, parseKiwiResult, toFlights } from "@/lib/kiwi";
 
 describe("futureDate", () => {
   it("formats as dd/mm/yyyy, which is what Kiwi expects", () => {
@@ -92,5 +92,24 @@ describe("toFlights", () => {
 
   it("returns nothing for an empty search", () => {
     expect(toFlights([])).toEqual([]);
+  });
+});
+
+describe("cheapestFare", () => {
+  const f = (priceEur: number) => ({
+    priceEur,
+    from: "STN",
+    to: "DEL",
+    durationHours: 14,
+    stops: 1,
+    bookingUrl: "",
+  });
+
+  it("finds the lowest price", () => {
+    expect(cheapestFare([f(400), f(288), f(350)])).toBe(288);
+  });
+
+  it("returns Infinity for no flights, so budget comparisons fail safe", () => {
+    expect(cheapestFare([])).toBe(Number.POSITIVE_INFINITY);
   });
 });

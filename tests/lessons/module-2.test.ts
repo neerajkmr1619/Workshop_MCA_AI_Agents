@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import type { LessonMeta } from "@/runner/step";
 
-const LESSONS = ["2.1-trip-graph"];
+const LESSONS = ["2.1-trip-graph", "2.2-trip-routing"];
 
 describe.each(LESSONS)("lesson %s", (id) => {
   it("imports, exports meta, and registers steps", async () => {
