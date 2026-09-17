@@ -51,6 +51,51 @@ describe("buildEnvReport", () => {
   });
 });
 
+describe("buildEnvReport — shell/.env conflicts", () => {
+  it("warns when a shell value differs from the .env value", () => {
+    const env = { ...GOOD_ENV, OPENAI_API_KEY: "sk-shell" } as NodeJS.ProcessEnv;
+    const report = buildEnvReport({
+      env,
+      nodeVersion: "v20.11.0",
+      dotenvValues: { OPENAI_API_KEY: "sk-dotenv" },
+    });
+    const warnings = report.filter((f) => f.level === "warn").map((f) => f.message);
+    expect(warnings.join(" ")).toMatch(/OPENAI_API_KEY/);
+    expect(warnings.join(" ")).toMatch(/shell/i);
+  });
+
+  it("does not warn when the shell value matches the .env value", () => {
+    const env = { ...GOOD_ENV } as NodeJS.ProcessEnv;
+    const report = buildEnvReport({
+      env,
+      nodeVersion: "v20.11.0",
+      dotenvValues: { OPENAI_API_KEY: env.OPENAI_API_KEY as string },
+    });
+    expect(report.filter((f) => f.level === "warn").map((f) => f.message).join(" ")).not.toMatch(
+      /takes precedence/,
+    );
+  });
+
+  it("does not warn about a variable in .env but absent from the shell", () => {
+    const env = { ...GOOD_ENV } as NodeJS.ProcessEnv;
+    const report = buildEnvReport({
+      env,
+      nodeVersion: "v20.11.0",
+      dotenvValues: { SOME_OTHER_VAR: "value" },
+    });
+    expect(report.filter((f) => f.level === "warn").map((f) => f.message).join(" ")).not.toMatch(
+      /takes precedence/,
+    );
+  });
+
+  it("does not warn when no dotenvValues are provided at all", () => {
+    const report = buildEnvReport({ env: GOOD_ENV, nodeVersion: "v20.11.0" });
+    expect(report.filter((f) => f.level === "warn").map((f) => f.message).join(" ")).not.toMatch(
+      /takes precedence/,
+    );
+  });
+});
+
 describe("hasErrors", () => {
   it("is true when any finding is an error", () => {
     expect(hasErrors([{ level: "error", message: "boom" }])).toBe(true);

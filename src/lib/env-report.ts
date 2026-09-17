@@ -20,8 +20,14 @@ const OPTIONAL_KEYS = [
 export function buildEnvReport(input: {
   env: NodeJS.ProcessEnv;
   nodeVersion: string;
+  /**
+   * Parsed contents of the .env file, when one exists. Passed in rather than
+   * read here so this function stays pure and unit-testable against
+   * fabricated inputs — real file I/O belongs in the caller (src/check-env.ts).
+   */
+  dotenvValues?: Record<string, string>;
 }): EnvFinding[] {
-  const { env, nodeVersion } = input;
+  const { env, nodeVersion, dotenvValues } = input;
   const findings: EnvFinding[] = [];
 
   const major = Number.parseInt(nodeVersion.replace(/^v/, "").split(".")[0] ?? "0", 10);
@@ -63,6 +69,18 @@ export function buildEnvReport(input: {
       message:
         "LANGSMITH_TRACING is true but LANGSMITH_API_KEY is not set. Set the key or turn tracing off.",
     });
+  }
+
+  if (dotenvValues) {
+    for (const [name, dotenvValue] of Object.entries(dotenvValues)) {
+      const shellValue = env[name];
+      if (shellValue !== undefined && shellValue !== dotenvValue) {
+        findings.push({
+          level: "warn",
+          message: `${name} is set in your shell environment, which takes precedence over the value in .env.`,
+        });
+      }
+    }
   }
 
   return findings;
