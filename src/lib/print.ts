@@ -1,4 +1,4 @@
-import type { AIMessage, BaseMessage } from "@langchain/core/messages";
+import type { AIMessage, BaseMessage } from "langchain";
 import { inspect } from "node:util";
 
 /**
