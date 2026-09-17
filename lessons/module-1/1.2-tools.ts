@@ -1,5 +1,6 @@
 import { ChatOllama } from "@langchain/ollama";
 import { HumanMessage, createAgent, tool } from "langchain";
+import { toJsonSchema } from "@langchain/core/utils/json_schema";
 import { z } from "zod";
 import { printMessages, printJson } from "@/lib/print";
 import { step, type LessonMeta } from "@/runner/step";
@@ -44,7 +45,7 @@ step(1, "Inspect a tool's name, description, and schema", async () => {
   console.log(`name:        ${squareRoot.name}`);
   console.log(`description: ${squareRoot.description}`);
   console.log(`\nJSON schema the model sees:`);
-  printJson(squareRoot.schema);
+  printJson(toJsonSchema(squareRoot.schema));
 });
 
 step(2, "Invoke a tool directly, without a model", async () => {
