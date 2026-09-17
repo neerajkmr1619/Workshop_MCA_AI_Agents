@@ -4,4 +4,4 @@ node_modules/
 dist/
 *.tsbuildinfo
 .langgraph_api/
-recordings/
+resources/question.wav
