@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   UnknownStepError,
   clearSteps,
@@ -9,6 +9,11 @@ import {
 
 beforeEach(() => {
   clearSteps();
+  vi.spyOn(console, "log").mockImplementation(() => {});
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 describe("step registration", () => {
