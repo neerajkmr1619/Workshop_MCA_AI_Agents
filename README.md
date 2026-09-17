@@ -54,7 +54,31 @@ all. Only its last two steps, which run an agent, need a local [Ollama](https://
 daemon — and they degrade gracefully with setup instructions if Ollama isn't reachable,
 rather than failing.
 
-Modules 2 and 3 are future phases and are not part of this repository yet.
+### Module 2 — LangGraph
+
+Where Module 1 used `createAgent`, Module 2 drops a level and builds graphs by hand:
+state, nodes and edges. Each lesson plans a trip to Delhi against **live flight data**
+from [Kiwi.com](https://mcp.kiwi.com)'s open MCP server.
+
+| Lesson | Topic |
+|---|---|
+| `2.1-trip-graph` | `StateGraph`, nodes, edges — a linear planner |
+| `2.2-trip-routing` | Conditional edges: branching on what the graph found |
+| `2.3-trip-agent` | Cycles: an itinerary that refines itself, and the guard that stops it |
+
+Every lesson prints its own graph as a [Mermaid](https://mermaid.live) diagram, so you
+can see the shape you just built before you run it.
+
+**`2.1-trip-graph` needs no API key at all** — Kiwi's MCP server is open, so the whole
+lesson, including live flight search, runs with nothing configured. `2.2` uses
+`TAVILY_API_KEY` to find places to stay and `2.3` uses `OPENAI_API_KEY` to write the
+itinerary; in both, the steps that need a key check for it and say so rather than
+failing, and the first two steps of each need nothing.
+
+Kiwi is a third-party service. If it is unreachable, the lessons say so plainly and
+nothing else in the course depends on it.
+
+Module 3 is a future phase and is not part of this repository yet.
 
 ## LangGraph Studio
 
