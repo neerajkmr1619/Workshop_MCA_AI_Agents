@@ -7,6 +7,7 @@ const LESSONS = [
   "1.2-tools",
   "1.2-web-search",
   "1.3-memory",
+  "1.4-multimodal-messages",
 ];
 
 describe.each(LESSONS)("lesson %s", (id) => {
