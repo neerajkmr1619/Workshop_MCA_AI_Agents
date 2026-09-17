@@ -8,6 +8,7 @@
     "lesson": "tsx src/runner/cli.ts",
     "lessons": "tsx src/runner/cli.ts --list",
     "check-env": "tsx src/check-env.ts",
+    "studio:m1": "cd studio/module-1 && npx @langchain/langgraph-cli dev",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -25,6 +26,7 @@
     "zod": "^3.25.0"
   },
   "devDependencies": {
+    "@langchain/langgraph-cli": "^1.4.6",
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.9.0",
