@@ -23,7 +23,7 @@ export const squareRoot = tool(
 const OLLAMA_MODEL = "qwen3:4b";
 
 async function ollamaIsRunning(): Promise<boolean> {
-  const host = process.env.OLLAMA_HOST ?? "http://localhost:11434";
+  const host = process.env.OLLAMA_BASE_URL ?? "http://127.0.0.1:11434";
   try {
     const response = await fetch(`${host}/api/tags`, {
       signal: AbortSignal.timeout(2000),
