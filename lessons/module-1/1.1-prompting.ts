@@ -64,7 +64,7 @@ Economy: Main industries
 });
 
 step(5, "Structured output with a Zod schema", async () => {
-  // The Python course uses a Pydantic BaseModel here; Zod is the TS equivalent.
+
   const capitalInfo = z.object({
     name: z.string(),
     location: z.string(),
@@ -83,9 +83,7 @@ step(5, "Structured output with a Zod schema", async () => {
     messages: [new HumanMessage("What is the capital of The Moon?")],
   });
 
-  // `structuredResponse` is the property langchain's createAgent result carries
-  // when `responseFormat` is set — verified against
-  // node_modules/langchain/dist/agents/ReactAgent.d.ts and runtime.d.ts.
+
   const info = response.structuredResponse;
   console.log(info);
   console.log(`\n${info.name} is a city located at ${info.location}`);

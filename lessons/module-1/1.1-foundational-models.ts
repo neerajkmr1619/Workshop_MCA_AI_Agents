@@ -13,7 +13,6 @@ export const meta: LessonMeta = {
 const QUESTION = "What's the capital of the Moon?";
 
 step(1, "Initialise and invoke a model", async () => {
-  // initChatModel is async in JavaScript, unlike the Python course.
   const model = await initChatModel("gpt-5-nano");
   const response = await model.invoke(QUESTION);
 
@@ -22,7 +21,7 @@ step(1, "Initialise and invoke a model", async () => {
   printJson(response.response_metadata);
 });
 
-step(2, "Customise the model with provider kwargs", async () => {
+step(2, "Customise the model with provider configurations", async () => {
   const model = await initChatModel("gpt-5-nano", { temperature: 1.0 });
   const response = await model.invoke(QUESTION);
   console.log(response.text);

@@ -10,11 +10,11 @@ export const meta: LessonMeta = {
   requires: [],
 };
 
-/** The @tool decorator in Python becomes the tool() function here. */
-export const squareRoot = tool(
+
+export const squareRoot_Neeraj = tool(
   ({ x }) => x ** 0.5,
   {
-    name: "square_root",
+    name: "square_root_Neeraj",
     description: "Calculate the square root of a number",
     schema: z.object({ x: z.number() }),
   },
@@ -36,20 +36,18 @@ async function ollamaIsRunning(): Promise<boolean> {
 
 function explainOllama(): void {
   console.log(`This step runs a local model with Ollama, which is not reachable.`);
-  console.log(`\n  1. Install Ollama:  https://ollama.com/download`);
-  console.log(`  2. Pull the model:  ollama pull ${OLLAMA_MODEL}`);
-  console.log(`  3. Re-run:          npm run lesson 1.2-tools\n`);
+
 }
 
 step(1, "Inspect a tool's name, description, and schema", async () => {
-  console.log(`name:        ${squareRoot.name}`);
-  console.log(`description: ${squareRoot.description}`);
+  console.log(`name:        ${squareRoot_Neeraj.name}`);
+  console.log(`description: ${squareRoot_Neeraj.description}`);
   console.log(`\nJSON schema the model sees:`);
-  printJson(toJsonSchema(squareRoot.schema));
+  printJson(toJsonSchema(squareRoot_Neeraj.schema));
 });
 
 step(2, "Invoke a tool directly, without a model", async () => {
-  const result = await squareRoot.invoke({ x: 467 });
+  const result = await squareRoot_Neeraj.invoke({ x: 467 });
   console.log(`square_root(467) = ${result}`);
 });
 
@@ -61,7 +59,7 @@ step(3, "Give the tool to an agent running a local model", async () => {
 
   const agent = createAgent({
     model: new ChatOllama({ model: OLLAMA_MODEL }),
-    tools: [squareRoot],
+    tools: [squareRoot_Neeraj],
     systemPrompt:
       "You are an arithmetic wizard. Use your tools to calculate the square root of any number.",
   });
@@ -81,7 +79,7 @@ step(4, "See the tool call the model made", async () => {
 
   const agent = createAgent({
     model: new ChatOllama({ model: OLLAMA_MODEL }),
-    tools: [squareRoot],
+    tools: [squareRoot_Neeraj],
     systemPrompt: "You are an arithmetic wizard. Use your tools.",
   });
 
@@ -89,6 +87,6 @@ step(4, "See the tool call the model made", async () => {
     messages: [new HumanMessage("What is the square root of 467?")],
   });
 
-  // printMessages renders tool calls inline, which is the point of this step.
+
   printMessages(response.messages);
 });

@@ -9,7 +9,7 @@ export const meta: LessonMeta = {
   requires: ["OPENAI_API_KEY", "TAVILY_API_KEY"],
 };
 
-const QUESTION = "Who is the current mayor of San Francisco?";
+const QUESTION = "Who won the 2026 FIFA worldcup?";
 
 /**
  * Built inside each step rather than at module scope: the TavilySearch
