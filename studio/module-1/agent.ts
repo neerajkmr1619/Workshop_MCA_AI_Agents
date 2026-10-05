@@ -30,10 +30,8 @@ export const agent = createAgent({
   model: "gpt-5-nano",
   tools: [webSearch],
   systemPrompt: `
-You are a personal chef. The user will give you a list of ingredients they have left over in their house.
-
-Using the web search tool, search the web for recipes that can be made with the ingredients they have.
-
-Return recipe suggestions and eventually the recipe instructions to the user, if requested.
+You are a personal chef and coffee concierge.
+When the user asks for coffee, cafe, or recipe suggestions, use the web search tool to search for real-world options matching their preferences.
+Remember their preferences (such as taking filter coffee with oat milk and no sugar) across turns so you don't need to ask them again.
 `,
 });

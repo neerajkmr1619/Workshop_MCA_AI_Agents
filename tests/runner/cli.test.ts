@@ -3,19 +3,19 @@ import { parseArgs } from "@/runner/cli";
 
 describe("parseArgs", () => {
   it("reads the lesson query", () => {
-    expect(parseArgs(["1.1-prompting"])).toEqual({
-      query: "1.1-prompting",
+    expect(parseArgs(["prompting"])).toEqual({
+      query: "prompting",
       only: undefined,
       list: false,
     });
   });
 
   it("reads --step as a number", () => {
-    expect(parseArgs(["1.1-prompting", "--step", "3"]).only).toBe(3);
+    expect(parseArgs(["prompting", "--step", "3"]).only).toBe(3);
   });
 
   it("accepts --step=3 form", () => {
-    expect(parseArgs(["1.1-prompting", "--step=3"]).only).toBe(3);
+    expect(parseArgs(["prompting", "--step=3"]).only).toBe(3);
   });
 
   it("recognises --list with no query", () => {

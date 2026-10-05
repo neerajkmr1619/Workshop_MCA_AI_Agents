@@ -2,13 +2,12 @@ import { describe, expect, it, vi } from "vitest";
 import type { LessonMeta } from "@/runner/step";
 
 const LESSONS = [
-  "1.1-foundational-models",
-  "1.1-prompting",
-  "1.2-tools",
-  "1.2-web-search",
-  "1.3-memory",
-  "1.4-multimodal-messages",
-  "1.5-personal-chef",
+  "foundational-models",
+  "prompting",
+  "tools",
+  "web-search",
+  "memory",
+  "personal-chef",
 ];
 
 describe.each(LESSONS)("lesson %s", (id) => {

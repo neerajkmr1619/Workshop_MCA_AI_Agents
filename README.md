@@ -25,14 +25,11 @@ stack trace.
 
 ```bash
 npm run lessons                          # list every lesson
-npm run lesson 1.3-memory                # run all of a lesson
-npm run lesson 1.3-memory -- --step 2    # run one step
+npm run lesson memory                    # run all of a lesson
+npm run lesson memory -- --step 1        # run one step
 ```
 
-Lesson IDs accept unambiguous prefixes: `npm run lesson 1.3` works, but `1.1` is
-ambiguous (two lessons share it) and will list the candidates instead of guessing.
-
-Each step is self-contained, so `--step 3` runs without needing steps 1 and 2 first.
+Lesson IDs accept unambiguous prefixes: `npm run lesson memo` works to run `memory`.
 
 ## Lessons
 
@@ -40,19 +37,12 @@ Each step is self-contained, so `--step 3` runs without needing steps 1 and 2 fi
 
 | Lesson | Topic |
 |---|---|
-| `1.1-foundational-models` | Invoking models, provider swapping, streaming |
-| `1.1-prompting` | System prompts, few-shot examples, structured output |
-| `1.2-tools` | Defining tools, binding them to an agent (local Ollama model) |
-| `1.2-web-search` | Giving an agent current information via Tavily |
-| `1.3-memory` | Checkpointers and thread ids |
-| `1.4-multimodal-messages` | Text, image, and audio content blocks |
-| `1.5-personal-chef` | Project: everything above in one agent |
-
-`1.2-tools` is worth running first if you don't have API keys configured yet: its
-first two steps (inspecting and invoking a tool directly) need no configuration at
-all. Only its last two steps, which run an agent, need a local [Ollama](https://ollama.com)
-daemon — and they degrade gracefully with setup instructions if Ollama isn't reachable,
-rather than failing.
+| `foundational-models` | Initialising and invoking a foundational chat model |
+| `prompting` | System prompts and guiding agent behavior |
+| `tools` | Defining tools and binding them to an agent |
+| `web-search` | Giving an agent current information via Tavily |
+| `memory` | Checkpointers and thread ids |
+| `personal-chef` | Project: everything above in one agent |
 
 Modules 2 and 3 are future phases and are not part of this repository yet.
 

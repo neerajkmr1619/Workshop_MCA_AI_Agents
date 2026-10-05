@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { squareRoot } from "../../lessons/module-1/1.2-tools";
+import { squareRoot } from "../../lessons/module-1/tools";
 
 describe("squareRoot tool", () => {
   it("is named so the model can call it", () => {

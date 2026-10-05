@@ -1,0 +1,24 @@
+# ==========================================
+# Commands to Run Workshop Lessons
+# ==========================================
+
+# 1. Check environment variables (.env setup)
+npm run check-env
+
+# 2. List all available lessons
+npm run lessons
+
+# 3. Run individual lessons:
+npm run lesson foundational-models
+npm run lesson prompting
+npm run lesson tools
+npm run lesson web-search
+npm run lesson memory
+npm run lesson personal-chef
+
+# 4. Run LangGraph Studio (visual agent graph)
+npm run studio:m1
+
+# 5. Run tests and typecheck
+npm test
+npm run typecheck
